@@ -1,0 +1,73 @@
+<div class="flex flex-col">
+  <.navbar class="h-20 bg-base-200 border-b border-base-content/30 z-10">
+    <:nav_start>
+      <.drawer_trigger drawer_id="main-drawer" class="btn-ghost lg:hidden">
+        <.icon name="hero-bars-3" />
+      </.drawer_trigger>
+      <a href="/examples/navbar_with_sidebar" class="btn btn-ghost text-xl">
+        <img src="/images/kindling.svg" class="h-10 w-10" /> KindlingUI
+      </a>
+    </:nav_start>
+    <:nav_center>
+      <label class="hidden lg:flex shrink basis-1/2 input input-bordered items-center gap-2">
+        <.icon name="hero-magnifying-glass" class="h-5 w-5" />
+        <input type="text" class="grow" placeholder="Search" />
+      </label>
+    </:nav_center>
+    <:nav_end class="gap-2 pr-2">
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-circle btn-ghost">
+          <.icon name="hero-bell" />
+        </div>
+        <ul class="menu dropdown-content bg-base-300 rounded-box z-10 w-64 lg:w-96 p-2 shadow">
+          <li>
+            <a>
+              <div class="text-base-content/50">You have no new messages</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <.avatar
+        online={true}
+        class="rounded-full border-2 border-accent"
+        src="https://images.unsplash.com/photo-1520341280432-4749d4d7bcf9?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
+    </:nav_end>
+  </.navbar>
+
+  <.drawer id="main-drawer" class="flex-1 lg:drawer-open">
+    <:side>
+      <div class="h-full flex flex-col justify-between bg-base-200 border-r border-base-content/30 p-4 text-base-content">
+        <div class="h-[calc(100dvh-5rem)] overflow-auto">
+          <.menu class="w-72">
+            <div class="block lg:hidden mb-2">
+              <label class="flex shrink basis-96 input input-sm input-bordered items-center gap-2">
+                <.icon name="hero-magnifying-glass" class="h-5 w-5" />
+                <input type="text" class="grow" placeholder="Search" />
+              </label>
+            </div>
+            <.menu_item label="Home" icon="hero-home" />
+            <.menu_item label="Inbox" icon="hero-inbox">
+              <span class="badge badge-secondary">7</span>
+            </.menu_item>
+            <.submenu label="Orders" icon="hero-folder" open>
+              <.menu_item label="All" />
+              <.menu_item label="Pending" />
+              <.menu_item label="Completed" />
+              <.menu_item label="Failed" />
+            </.submenu>
+            <div class="divider"></div>
+            <.menu_item label="Account" icon="hero-user" />
+            <.menu_item label="Settings" icon="hero-cog" />
+            <.menu_item label="Help" icon="hero-light-bulb" />
+          </.menu>
+        </div>
+      </div>
+    </:side>
+
+    <main class="grid p-4 sm:p-6 lg:p-8 overflow-hidden">
+      <.flash_group flash={@flash} />
+      <%= @inner_content %>
+    </main>
+  </.drawer>
+</div>
